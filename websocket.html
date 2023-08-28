@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const symbol = 'BTCUSDT'; // Replace with the desired symbol
+        const interval = '1m'; // Replace with the desired interval
+        const socket = new WebSocket(`ws://localhost:8000/ws/${symbol}/${interval}`);
+
+        // Event handler for when the connection is established
+        socket.addEventListener('open', (event) => {
+            console.log('WebSocket connection opened:', event);
+        });
+
+        // Event handler for receiving messages from the WebSocket
+        socket.addEventListener('message', (event) => {
+            const data = JSON.parse(event.data);
+            console.log('Received data:', data);
+            // Process and update your UI with the received data
+        });
+
+        // Event handler for when the connection is closed
+        socket.addEventListener('close', (event) => {
+            console.log('WebSocket connection closed:', event);
+        });
+
+        // Event handler for WebSocket errors
+        socket.addEventListener('error', (event) => {
+            console.error('WebSocket error:', event);
+        });
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
